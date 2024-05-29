@@ -5,4 +5,13 @@
     <string name="travels_title">Travels</string>
     <string name="spent_today">Spent today</string>
     <string name="navigate_back">Back</string>
+    <string name="travel_name">Name</string>
+    <string name="currency">Currency</string>
+    <string name="budget">Budget</string>
+    <string name="start">Start</string>
+    <string name="end">End</string>
+    <string name="notes">Notes</string>
+    <string name="save_button">Save</string>
+
+
 </resources>

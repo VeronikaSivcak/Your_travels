@@ -2,15 +2,16 @@ package com.example.yourtravels.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.Date
 
 
-@Entity(tableName = "listOfJourneys")
-data class Journey(
+@Entity(tableName = "listOfTravels")
+data class Travel(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,
-    //val startDate: Date,
-    //val endDate: Date,
-    val budget: Int
+    val startDate: String,
+    val endDate: String,
+    val budget: Double,
+   // val notes: String
 )
+
