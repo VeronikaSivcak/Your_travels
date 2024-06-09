@@ -27,7 +27,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -49,14 +48,14 @@ object Home : NavigationDestination {
 @Composable
 fun HomeScreen(
     navigateToItemEntry: () -> Unit,
-    //navigateToItemUpdate: (Int) -> Unit,
+    navigateToTravelDetails: (Int) -> Unit,
     viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory),
     modifier: Modifier = Modifier
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val homeUiState by viewModel.homeUiState.collectAsState()
     Scaffold(
-        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+       // modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
                  YTTopAppBar(
                      name = stringResource(R.string.app_name),
@@ -80,7 +79,7 @@ fun HomeScreen(
 
         BodyOfHomeScreen(
             travelList = homeUiState.travelList,
-            onItemClick = {},
+            onItemClick = navigateToTravelDetails,
             modifier = modifier
                 .fillMaxSize()
                 .padding(innerPadding),
@@ -93,7 +92,7 @@ fun HomeScreen(
 @Composable
 private fun BodyOfHomeScreen(
     travelList: List<Travel>,
-    onItemClick: (Travel) -> Unit,
+    onItemClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
@@ -145,7 +144,7 @@ private fun BodyOfHomeScreen(
 
             ListOfTravels(
                 travelList = travelList,
-                onItemClick = { onItemClick(it) },
+                onItemClick = { onItemClick(it.id) },
                 contentPadding = contentPadding,
                 modifier = Modifier.padding(horizontal = 8.dp)
             )
@@ -157,9 +156,10 @@ private fun BodyOfHomeScreen(
 @Composable
 private fun SimpleTravel(
     travel : Travel,
-    modifier : Modifier = Modifier) {
+    modifier : Modifier = Modifier)
+    {
         Card(
-            modifier = Modifier.padding(15.dp),
+            modifier = modifier.padding(15.dp),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.surfaceVariant
             ),
@@ -177,14 +177,16 @@ private fun SimpleTravel(
                     text = travel.name,
                     style = typography.titleLarge
                 )
+                //resource!!!!!!!!!!!!!
                 Text(
-                    text = travel.budget.toString(),
+                    text = travel.startDate + " - " + travel.endDate,
                     style = typography.titleMedium
                 )
                 Text(
-                    text = travel.id.toString(),
+                    text = String.format("%.2f", travel.budget) + "€",
                     style = typography.titleMedium
                 )
+
             }
         }
 }
@@ -203,7 +205,7 @@ private fun ListOfTravels(
         items(items = travelList, key = {it.id}) { item->
             SimpleTravel(travel = item,
                 modifier = Modifier
-                    .clickable { onItemClick(item) })
+                    .clickable { onItemClick(item)} )
         }
 
     }

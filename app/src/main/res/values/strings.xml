@@ -2,6 +2,7 @@
     <string name="app_name">Your Travels</string>
     <string name="empty_travel_list">Your travel list is empty! \n Add new travel by tapping + button.</string>
     <string name="add_travel_to_list">Add travel</string>
+    <string name="add_new_travel">Add new travel</string>
     <string name="travels_title">Travels</string>
     <string name="spent_today">Spent today</string>
     <string name="navigate_back">Back</string>

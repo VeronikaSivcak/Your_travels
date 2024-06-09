@@ -20,7 +20,8 @@ class NewTravelViewModel(private val travelsRepository: TravelsRepository) : Vie
 
     private fun controlInput(uiState: TravelInfo = travelUiState.travelInfo) : Boolean {
         return with(uiState) {
-            name.isNotBlank()
+            name.isNotBlank() && budget.isNotBlank() && ((budget.toDoubleOrNull() ?: 0.0) > 0.0)
+                    && startDate.isNotBlank() && endDate.isNotBlank()
         }
     }
 
@@ -44,7 +45,7 @@ data class TravelInfo(
     val startDate: String = "",
     val endDate: String = "",
     val budget: String = "",
-    //val notes: String = ""
+    val notes: String? = null
 )
 
 fun TravelInfo.toTravel(): Travel = Travel(
@@ -53,7 +54,16 @@ fun TravelInfo.toTravel(): Travel = Travel(
     startDate = startDate,
     endDate = endDate,
     budget = budget.toDoubleOrNull() ?: 0.0,
-    //notes = notes
+    notes = notes
 
+)
+
+fun Travel.toTravelInfo(): TravelInfo = TravelInfo(
+    id = id,
+    name = name,
+    startDate = startDate,
+    endDate = endDate,
+    budget = budget.toString(),
+    notes = notes
 )
 

@@ -1,9 +1,11 @@
 package com.example.yourtravels
 
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
+import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.yourtravels.add_screens.InfoTravelViewModel
 import com.example.yourtravels.add_screens.NewTravelViewModel
 import com.example.yourtravels.home.HomeViewModel
 
@@ -12,6 +14,11 @@ object AppViewModelProvider {
     val Factory = viewModelFactory {
         initializer {
             NewTravelViewModel(yourTravelsApplication().container.travelsRepository)
+        }
+
+        initializer {
+            InfoTravelViewModel(yourTravelsApplication().container.travelsRepository,
+                this.createSavedStateHandle())
         }
 
         initializer {

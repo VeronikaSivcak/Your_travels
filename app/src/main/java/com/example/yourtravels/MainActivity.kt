@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.yourtravels.add_screens.InfoTravelScreen
 import com.example.yourtravels.start.YourTravelsApp
 import com.example.yourtravels.ui.theme.YourTravelsTheme
 
@@ -24,6 +25,7 @@ class MainActivity : ComponentActivity() {
                     //InputForNewTravel()
                     //NewTravelScreen()
                     YourTravelsApp()
+                    //InfoTravelScreen()
                     }
                 }
             }

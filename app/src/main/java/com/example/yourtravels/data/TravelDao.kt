@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
@@ -19,10 +20,25 @@ interface TravelDao {
 
     @Delete
     suspend fun delete(travel : Travel)
+  /*  @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(expense: Expense)
+    @Update
+    suspend fun update(expense: Expense)
+    @Delete
+    suspend fun delete(expense: Expense)*/
 
-    @Query("SELECT * from listOfTravels WHERE id = :id")
+    @Query("SELECT * FROM listOfTravels WHERE id = :id")
     fun getTravel(id: Int): Flow<Travel>
 
-    @Query("SELECT * from listOfTravels")
+    @Query("SELECT * FROM listOfTravels")
     fun getAllTravels(): Flow<List<Travel>>
+
+  /*  @Transaction
+    @Query("SELECT * FROM listOfTravels")
+    fun getTravelsWithExpenses(): List<TravelAndExpenses>
+
+    //vrati zoznam vydavkov pre konkretnu cestu
+    @Transaction
+    @Query("SELECT * FROM listOfTravels WHERE id = :travelId")
+    fun getTravelWithExpenses(travelId: Int): TravelAndExpenses?*/
 }
