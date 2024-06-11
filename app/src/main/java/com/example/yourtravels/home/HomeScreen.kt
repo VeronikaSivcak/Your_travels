@@ -29,21 +29,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.yourtravels.AppViewModelProvider
+import com.example.yourtravels.application.AppViewModelProvider
 import com.example.yourtravels.R
-import com.example.yourtravels.YTTopAppBar
+import com.example.yourtravels.components.YTTopAppBar
 import com.example.yourtravels.data.Travel
 import com.example.yourtravels.navigation.NavigationDestination
-import com.example.yourtravels.ui.theme.YourTravelsTheme
 
 
 object Home : NavigationDestination {
     override val route = "app_name"
 }
 
+/**
+ * domovska obrazovka
+ * robena podla codelabu Inventory
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
@@ -55,7 +57,6 @@ fun HomeScreen(
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val homeUiState by viewModel.homeUiState.collectAsState()
     Scaffold(
-       // modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
                  YTTopAppBar(
                      name = stringResource(R.string.app_name),
@@ -82,36 +83,24 @@ fun HomeScreen(
             onItemClick = navigateToTravelDetails,
             modifier = modifier
                 .fillMaxSize()
-                .padding(innerPadding),
-            //contentPadding = innerPadding
+                .padding(innerPadding)
         )
     }
 }
 
-
+/**
+ * telo domovskej obrazovky
+ */
 @Composable
 private fun BodyOfHomeScreen(
     travelList: List<Travel>,
     onItemClick: (Int) -> Unit,
-    modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(0.dp)
+    modifier: Modifier = Modifier
 ) {
-    if (travelList.isEmpty()) {
+    if (travelList.isNotEmpty()) {
         Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-                modifier = modifier
-        ) {
-            Text(
-                text = stringResource(R.string.empty_travel_list),
-                style = typography.titleLarge,
-                textAlign = TextAlign.Center
-            )
-        }
-    } else {
-        Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = modifier
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = modifier
         ) {
             Card(
                 modifier = Modifier.padding(18.dp),
@@ -125,11 +114,8 @@ private fun BodyOfHomeScreen(
                     modifier = Modifier.padding(8.dp)
                 ) {
                     Text(
-                        text = stringResource(R.string.spent_today),
-                        style = typography.titleLarge
-                    )
-                    Text(
-                        text = "150€",
+                        text = stringResource(R.string.quote),
+                        textAlign = TextAlign.Center,
                         style = typography.titleLarge
                     )
                 }
@@ -145,14 +131,27 @@ private fun BodyOfHomeScreen(
             ListOfTravels(
                 travelList = travelList,
                 onItemClick = { onItemClick(it.id) },
-                contentPadding = contentPadding,
                 modifier = Modifier.padding(horizontal = 8.dp)
+            )
+        }
+    } else {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = modifier
+        ) {
+            Text(
+                text = stringResource(R.string.empty_travel_list),
+                style = typography.titleLarge,
+                textAlign = TextAlign.Center
             )
         }
     }
 }
 
-
+/**
+ * SimpleTravel predsatvuje ako bude znázornená cesta na obrazovke
+ */
 @Composable
 private fun SimpleTravel(
     travel : Travel,
@@ -167,7 +166,6 @@ private fun SimpleTravel(
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                //verticalArrangement = Arrangement.spacedBy(3.dp),
                 modifier = Modifier
                     .padding(10.dp)
                     .fillMaxWidth()
@@ -177,13 +175,12 @@ private fun SimpleTravel(
                     text = travel.name,
                     style = typography.titleLarge
                 )
-                //resource!!!!!!!!!!!!!
                 Text(
-                    text = travel.startDate + " - " + travel.endDate,
+                    text = travel.startDate + stringResource(R.string.dash) + travel.endDate,
                     style = typography.titleMedium
                 )
                 Text(
-                    text = String.format("%.2f", travel.budget) + "€",
+                    text = String.format("%.2f", travel.budget) + stringResource(R.string.euro),
                     style = typography.titleMedium
                 )
 
@@ -191,16 +188,20 @@ private fun SimpleTravel(
         }
 }
 
+
+/**
+ * Predstavuje zoznam ciest.
+ * robené podľa: InventoryList z codelabu Inventory
+ */
 @Composable
 private fun ListOfTravels(
     travelList: List<Travel>,
     onItemClick: (Travel) -> Unit,
-    contentPadding: PaddingValues,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
         modifier = modifier,
-        contentPadding = contentPadding
+        contentPadding = PaddingValues(0.dp)
     ) {
         items(items = travelList, key = {it.id}) { item->
             SimpleTravel(travel = item,
@@ -211,19 +212,3 @@ private fun ListOfTravels(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun HomeBodyPreview() {
-    YourTravelsTheme {
-        BodyOfHomeScreen(
-            listOf(
-
-            ), onItemClick ={} )
-    }
-}
-
-@Preview
-@Composable
-fun SimpleItemPreview() {
-    //SimpleTravel
-}

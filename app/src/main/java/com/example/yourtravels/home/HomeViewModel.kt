@@ -9,8 +9,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
+/**
+ * robené podľa codelabu inventory - HomeViewModel
+ */
 
-//inventory app - HomeViewModel
 class HomeViewModel(travelsRepository: TravelsRepository) : ViewModel() {
     val homeUiState: StateFlow<HomeUiState> =
         travelsRepository.getAllTravelsStream().map { HomeUiState(it) }

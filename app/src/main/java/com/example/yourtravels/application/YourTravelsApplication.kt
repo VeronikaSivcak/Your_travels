@@ -1,11 +1,13 @@
-package com.example.yourtravels
+package com.example.yourtravels.application
 
 import android.app.Application
 import com.example.yourtravels.data.AppContainer
 import com.example.yourtravels.data.AppDataContainer
 
+/**
+ * Túto triedu som robila podľa InventoryApplication z codelabu
+ */
 
-//InventoryApplication
 class YourTravelsApplication : Application() {
     lateinit var container: AppContainer
 

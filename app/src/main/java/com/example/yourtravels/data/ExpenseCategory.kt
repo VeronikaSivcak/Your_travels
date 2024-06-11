@@ -1,5 +1,8 @@
 package com.example.yourtravels.data
 
+/**
+ * enum predstavuje kategorie vydavkov
+ */
 enum class ExpenseCategory {
     ACCOMMODATION,
     ENTERTAINMENT,
@@ -11,3 +14,4 @@ enum class ExpenseCategory {
     SOUVENIRS,
     TRANSPORT
 }
+

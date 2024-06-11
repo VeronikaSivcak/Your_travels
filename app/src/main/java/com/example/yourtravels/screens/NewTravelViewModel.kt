@@ -1,4 +1,4 @@
-package com.example.yourtravels.add_screens
+package com.example.yourtravels.screens
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -7,8 +7,10 @@ import androidx.lifecycle.ViewModel
 import com.example.yourtravels.data.Travel
 import com.example.yourtravels.data.TravelsRepository
 
+/**
+ * zdroj: robene podla ItemEntryViewModel codelabu Inventory
+ */
 
-//ItemEntryViewModel
 class NewTravelViewModel(private val travelsRepository: TravelsRepository) : ViewModel() {
     var travelUiState by mutableStateOf(TravelUiState())
         private set
@@ -31,8 +33,6 @@ class NewTravelViewModel(private val travelsRepository: TravelsRepository) : Vie
         }
     }
 }
-
-
 
 data class TravelUiState(
     val travelInfo: TravelInfo = TravelInfo(),

@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">Your Travels</string>
     <string name="empty_travel_list">Your travel list is empty! \n Add new travel by tapping + button.</string>
+    <string name="empty_expense_list">No expenses yet! \n\nAdd them by + button.</string>
     <string name="add_travel_to_list">Add travel</string>
+    <string name="add_expense_to_list">Add expense</string>
     <string name="add_new_travel">Add new travel</string>
+    <string name="add_new_expense">Add new expense</string>
     <string name="travels_title">Travels</string>
     <string name="spent_today">Spent today</string>
     <string name="navigate_back">Back</string>
@@ -13,6 +16,21 @@
     <string name="end">End</string>
     <string name="notes">Notes</string>
     <string name="save_button">Save</string>
+    <string name="date">Date</string>
+    <string name="expense_price">Price</string>
+    <string name="name">Name</string>
+    <string name="expenses_title">Expenses</string>
+    <string name="travel_description_name">Name:</string>
+    <string name="travel_description_budget">Budget:</string>
+    <string name="euro">€</string>
+    <string name="travel_description_start_day">Start day:</string>
+    <string name="travel_description_end_day">End day:</string>
+    <string name="travel_description_notes">Notes:</string>
+    <string name="total_spent">"Total spent"</string>
+    <string name="total_left">"Total left"</string>
+    <string name="select_payment_method">Select payment method:</string>
+    <string name="dash">" - "</string>
+    <string name="quote">\"Explore. Dream. Discover.\" \n- Mark Twain</string>
 
 
 </resources>

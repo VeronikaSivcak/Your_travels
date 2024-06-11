@@ -1,4 +1,4 @@
-package com.example.yourtravels
+package com.example.yourtravels.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -14,8 +14,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import com.example.yourtravels.R
 
 
+/**
+ * TopAppBar mojej aplikácie.
+ * zdroj: codelab Inventory
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun YTTopAppBar(
@@ -44,5 +49,5 @@ fun YTTopAppBar(
                 }
             }
         }
-        )
+    )
 }

@@ -1,15 +1,20 @@
-package com.example.yourtravels
+package com.example.yourtravels.application
 
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.yourtravels.add_screens.InfoTravelViewModel
-import com.example.yourtravels.add_screens.NewTravelViewModel
+import com.example.yourtravels.screens.InfoTravelViewModel
+import com.example.yourtravels.screens.NewExpenseViewModel
+import com.example.yourtravels.screens.NewTravelViewModel
 import com.example.yourtravels.home.HomeViewModel
 
-//AppViewModelProvider
+/**
+ * Vytvára inštancie ViewModelov pre celú aplikáciu.
+ * Robila som podľa: AppViewModelProvider z codelabu Inventory
+ */
+
 object AppViewModelProvider {
     val Factory = viewModelFactory {
         initializer {
@@ -18,7 +23,11 @@ object AppViewModelProvider {
 
         initializer {
             InfoTravelViewModel(yourTravelsApplication().container.travelsRepository,
+                yourTravelsApplication().container.expenseRepository,
                 this.createSavedStateHandle())
+        }
+        initializer {
+            NewExpenseViewModel(yourTravelsApplication().container.expenseRepository)
         }
 
         initializer {
